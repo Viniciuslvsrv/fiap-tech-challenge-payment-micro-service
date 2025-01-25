@@ -23,8 +23,8 @@ public class Payment extends AggregateRoot<PaymentID> {
     private Instant createdAt;
     private PaymentStatus paymentStatus;
 
-    public Payment(PaymentID paymentID, String orderID, String clientID, BigDecimal amount, Instant createdAt, PaymentStatus paymentStatus) {
-        super(paymentID);
+    public Payment(PaymentID id, String orderID, String clientID, BigDecimal amount, Instant createdAt, PaymentStatus paymentStatus) {
+        super(id);
         this.orderID = orderID;
         this.clientID = clientID;
         this.amount = amount;
@@ -45,8 +45,8 @@ public class Payment extends AggregateRoot<PaymentID> {
         return this;
     }
 
-    public static Payment with(PaymentID paymentID, String orderID, String clientID, BigDecimal amount, Instant createAt, PaymentStatus paymentStatus) {
-        return new Payment(paymentID, orderID, clientID, amount, createAt, paymentStatus);
+    public static Payment with(PaymentID id, String orderID, String clientID, BigDecimal amount, Instant createAt, PaymentStatus paymentStatus) {
+        return new Payment(id, orderID, clientID, amount, createAt, paymentStatus);
     }
 
     public static Payment with(Payment payment) {
@@ -69,5 +69,4 @@ public class Payment extends AggregateRoot<PaymentID> {
                 ", paymentStatus=" + paymentStatus +
                 '}';
     }
-
 }

@@ -8,6 +8,7 @@ import com.fiap.tech.payment.domain.Identifier;
 import java.util.function.Supplier;
 
 public final class IDNotFoundUtils {
+    
     public static Supplier<DomainException> notFound(final Identifier anId, Class<? extends AggregateRoot<?>> anAggregate) {
         return () -> NotFoundException.with(anAggregate, anId);
     }

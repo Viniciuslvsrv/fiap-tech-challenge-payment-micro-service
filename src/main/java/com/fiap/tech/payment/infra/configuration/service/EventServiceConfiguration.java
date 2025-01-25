@@ -7,7 +7,7 @@ import com.fiap.tech.payment.infra.service.EventService;
 import com.fiap.tech.payment.infra.service.impl.KafkaEventService;
 
 @Configuration
-public class EventServiceconfiguration {
+public class EventServiceConfiguration {
 
     @Bean
     EventService kafkaEventService() {

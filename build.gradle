@@ -27,26 +27,46 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.kafka:spring-kafka:3.3.1'
-	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
-	implementation 'com.mercadopago:sdk-java:2.1.29'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.junit.jupiter:junit-jupiter:5.7.0'
-	testImplementation 'org.mockito:mockito-core:3.9.0'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-	compileOnly 'org.projectlombok:lombok:1.18.34'
-	annotationProcessor 'org.projectlombok:lombok:1.18.20'
+	// Dependências do Spring Boot e Frameworks Principais
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa' 
+	implementation 'org.springframework.boot:spring-boot-starter-web' 
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'io.micrometer:micrometer-registry-prometheus'
+
+	// Dependências relacionadas ao Kafka
+	implementation 'org.springframework.kafka:spring-kafka:3.3.1' 
+	implementation 'org.apache.kafka:kafka-clients:3.9.0'
+
+	// Dependências relacionadas ao OpenAPI/Swagger
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
+
+	// Dependências relacionadas ao MercadoPago
+	implementation 'com.mercadopago:sdk-java:2.1.29'
+
+	// Dependências relacionadas ao Elasticsearch
 	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
 	implementation 'org.elasticsearch.client:elasticsearch-rest-high-level-client:7.17.1'
-	implementation 'com.fasterxml.jackson.core:jackson-core:2.13.3'
-	implementation 'org.apache.kafka:kafka-clients:3.9.0'
-    implementation 'org.springframework.data:spring-data-mongodb:4.2.2'
-    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb:3.2.2'
-	implementation('com.fasterxml.jackson.module:jackson-module-afterburner')
+
+	// Dependências relacionadas ao MongoDB
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb:3.3.1'
+	implementation 'org.springframework.data:spring-data-mongodb:4.3.1'
+
+	// Dependências do Jackson para manipulação de JSON
+	implementation 'com.fasterxml.jackson.core:jackson-core:2.18.2'
+	implementation 'com.fasterxml.jackson.module:jackson-module-afterburner:2.18.2'
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.2'
+
+	// Dependências de Monitoramento
+	implementation 'io.micrometer:micrometer-registry-prometheus'
+
+	// Dependências de Testes
+	testImplementation 'org.springframework.boot:spring-boot-starter-test' 
+	testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2' 
+	testImplementation 'org.mockito:mockito-core:3.12.4' 
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	// Dependências do Lombok (para reduzir boilerplate)
+	compileOnly 'org.projectlombok:lombok:1.18.34'
+	annotationProcessor 'org.projectlombok:lombok:1.18.34'
 }
 
 // Excluir o commons-logging

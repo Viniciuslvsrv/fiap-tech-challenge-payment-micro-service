@@ -34,11 +34,13 @@ public class DefaultPaymentGateway implements PaymentGateway {
     @Override
     @Transactional(readOnly = true)
     public Optional<Payment> findById(PaymentID paymentID) {
-        return this.paymentRepository.findByPaymentID(paymentID);
+        String paymentIDString = paymentID.getValue();
+
+        return this.paymentRepository.findByPaymentID(paymentIDString);
     }
 
     private Payment save(final Payment payment) {
-        final var result = this.paymentRepository.save(payment);
+        final var result = this.paymentRepository.insert(payment);
 
         payment.registerEvent(new PaymentCreated(result));
 

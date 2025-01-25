@@ -13,11 +13,9 @@ import org.springframework.kafka.core.KafkaAdmin;
 @Configuration
 public class KafkaTopicConfiguration {
     
-    @Value(value = "${spring.kafka.bootstrap-servers}") String bootstrapAddress;
-
     @Value(value = "${kafka.topic.payment-request}") String requestTopic;
-
     @Value(value = "${kafka.topic.payment-response}") String responseTopic;
+    @Value(value = "${spring.kafka.bootstrap-servers}") String bootstrapAddress;
 
     @Bean
     public KafkaAdmin kafkaAdmin() {

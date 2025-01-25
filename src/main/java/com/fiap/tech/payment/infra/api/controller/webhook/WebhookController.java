@@ -2,6 +2,7 @@ package com.fiap.tech.payment.infra.api.controller.webhook;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Hidden;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/webhook")
 @Tag(name = "Webhook Controller", description = "Receives payment notifications")
+@Hidden
 public class WebhookController {
 
     @PostMapping("/payment-notification")
