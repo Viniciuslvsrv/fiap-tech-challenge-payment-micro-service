@@ -32,9 +32,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web' 
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
-	// Dependências relacionadas ao Kafka
-	implementation 'org.springframework.kafka:spring-kafka:3.3.1' 
-	implementation 'org.apache.kafka:kafka-clients:3.9.0'
+	// Dependências relacionadas ao AMQP
+	implementation 'org.springframework.boot:spring-boot-starter-amqp'
 
 	// Dependências relacionadas ao OpenAPI/Swagger
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
@@ -61,7 +60,9 @@ dependencies {
 	// Dependências de Testes
 	testImplementation 'org.springframework.boot:spring-boot-starter-test' 
 	testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2' 
-	testImplementation 'org.mockito:mockito-core:3.12.4' 
+	testImplementation 'org.mockito:mockito-core:5.14.2' 
+	testImplementation 'org.mockito:mockito-inline:5.2.0'
+	testImplementation('org.springframework.amqp:spring-rabbit-test:2.4.8')
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
 	// Dependências do Lombok (para reduzir boilerplate)

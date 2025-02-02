@@ -21,5 +21,4 @@ public class DefaultGetPaymentByIdUseCase extends GetPaymentByIdUseCase{
                              .map(GetPaymentOutput::from)
                              .orElseThrow(IDNotFoundUtils.notFound(paymentID, Payment.class));
     }
-
 }
