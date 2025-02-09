@@ -41,7 +41,7 @@ jobs:
         run: |
           curl -X POST \
           -H 'Content-type: application/json' \
-          --data '{"content":"✅ LANCHONETE-> PAYMENT 💵💳: Build de Pagamento concluído com sucesso!🛠️"}' \
+          --data '{"content":"✅ Microsserviço PAYMENT 💵 💳: Build de Pagamento concluído com sucesso!🛠️"}' \
           ${{ secrets.DISCORD_WEBHOOK_URL }}
 
       - name: Send Discord Notification - Build Failure
@@ -49,7 +49,7 @@ jobs:
         run: |
           curl -X POST \
             -H 'Content-type: application/json' \
-            --data '{"content":"⚠️🛑 LANCHONETE-> PAYMENT 💵💳: Build de Pagamento falhou 🚫! Verifique os logs para mais detalhes."}' \
+            --data '{"content":"⚠️🛑 Microsserviço PAYMENT 💵 💳: Build de Pagamento falhou 🚫! Verifique os logs para mais detalhes."}' \
             ${{ secrets.DISCORD_WEBHOOK_URL }}
 
   test:
@@ -81,21 +81,26 @@ jobs:
         run: ./gradlew check
         continue-on-error: true
 
+      - name: Run SonarQube Analysis
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: ./gradlew sonarqube
+
       - name: Send Discord Notification - Test Success
         if: success()
         run: |
-            curl -X POST \
-              -H 'Content-type: application/json' \
-              --data '{"content":"✅ LANCHONETE-> PAYMENT 💵💳: Testes concluídos com sucesso!📒✏️"}' \
-              ${{ secrets.DISCORD_WEBHOOK_URL }}
+          curl -X POST \
+            -H 'Content-type: application/json' \
+            --data '{"content":"✅ Microsserviço PAYMENT 💵 💳: Testes concluídos com sucesso!📒✏️"}' \
+            ${{ secrets.DISCORD_WEBHOOK_URL }}
 
       - name: Send Discord Notification - Test Failure
         if: failure()
         run: |
-            curl -X POST \
-              -H 'Content-type: application/json' \
-              --data '{"content":"⚠️🛑 LANCHONETE-> PAYMENT 💵💳: Testes falharam! Verifique os logs para mais detalhes. 🚫"}' \
-              ${{ secrets.DISCORD_WEBHOOK_URL }}
+          curl -X POST \
+            -H 'Content-type: application/json' \
+            --data '{"content":"⚠️🛑 Microsserviço PAYMENT 💵 💳: Testes falharam! Verifique os logs para mais detalhes. 🚫"}' \
+            ${{ secrets.DISCORD_WEBHOOK_URL }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -125,15 +130,15 @@ jobs:
       - name: Send Discord Success Notification - Deploy
         if: success()
         run: |
-            curl -X POST \
-            -H 'Content-type: application/json' \
-            --data '{"content":"✅ LANCHONETE-> PAYMENT 💵💳: Deploy concluído com sucesso!🚀🚀🚀"}' \
-            ${{ secrets.DISCORD_WEBHOOK_URL }}
+          curl -X POST \
+          -H 'Content-type: application/json' \
+          --data '{"content":"✅ Microsserviço PAYMENT 💵 💳: Deploy concluído com sucesso!🚀🚀🚀"}' \
+          ${{ secrets.DISCORD_WEBHOOK_URL }}
 
       - name: Send Discord Failure Notification - Deploy
         if: failure()
         run: |
-            curl -X POST \
-            -H 'Content-type: application/json' \
-            --data '{"content":"⚠️🛑 LANCHONETE-> PAYMENT 💵💳: Deploy falhou! Verifique os logs para mais detalhes.🚫"}' \
-            ${{ secrets.DISCORD_WEBHOOK_URL }}
+          curl -X POST \
+          -H 'Content-type: application/json' \
+          --data '{"content":"⚠️🛑 Microsserviço PAYMENT 💵 💳: Deploy falhou! Verifique os logs para mais detalhes.🚫"}' \
+          ${{ secrets.DISCORD_WEBHOOK_URL }}
