@@ -122,18 +122,6 @@ jobs:
       - name: Push Docker image
         run: docker push gabiponcet/lanchonete-payment:latest
 
-      - name: Set up LocalStack
-        run: docker-compose -f ./localstack-compose.yml up -d
-
-      - name: Deploy to LocalStack
-        run: |
-          aws --endpoint-url=http://localhost:4566 cloudformation deploy ...
-          aws --endpoint-url=http://localhost:4566 s3 mb s3://my-bucket
-
-      - name: Shut down LocalStack
-        if: always()
-        run: docker-compose -f ./localstack-compose.yml down
-
       - name: Send Discord Success Notification - Deploy
         if: success()
         run: |
