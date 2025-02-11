@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Json.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fiap-tech-challenge-payment</a> &gt; <a href="index.source.html" class="el_package">com.fiap.tech.payment.infra.configuration.json</a> &gt; <span class="el_source">Json.java</span></div><h1>Json.java</h1><pre class="source lang-java linenums">package com.fiap.tech.payment.infra.configuration.json;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.util.StdDateFormat;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+
+import java.util.concurrent.Callable;
+
+/**
+ * Singleton class for JSON serialization and deserialization configuration.
+ */
+public final class Json {
+
+<span class="fc" id="L20">    private static final Json INSTANCE = new Json();</span>
+
+    private final ObjectMapper mapper;
+
+<span class="fc" id="L24">    private Json() {</span>
+<span class="fc" id="L25">        this.mapper = createObjectMapper();</span>
+<span class="fc" id="L26">    }</span>
+
+    public static ObjectMapper mapper() {
+<span class="nc" id="L29">        return INSTANCE.mapper.copy();</span>
+    }
+
+    public static String writeValueAsString(final Object obj) {
+<span class="fc" id="L33">        return invoke(() -&gt; INSTANCE.mapper.writeValueAsString(obj));</span>
+    }
+
+    public static &lt;T&gt; T readValue(final String json, final Class&lt;T&gt; clazz) {
+<span class="fc" id="L37">        return invoke(() -&gt; INSTANCE.mapper.readValue(json, clazz));</span>
+    }
+
+    private ObjectMapper createObjectMapper() {
+<span class="fc" id="L41">        return new Jackson2ObjectMapperBuilder()</span>
+<span class="fc" id="L42">            .dateFormat(new StdDateFormat())</span>
+<span class="fc" id="L43">            .featuresToDisable(</span>
+                DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,
+                DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES,
+                DeserializationFeature.FAIL_ON_NULL_CREATOR_PROPERTIES,
+                SerializationFeature.WRITE_DATES_AS_TIMESTAMPS
+            )
+<span class="fc" id="L49">            .modules(new JavaTimeModule(), new Jdk8Module(), createAfterburnerModule())</span>
+<span class="fc" id="L50">            .propertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE)</span>
+<span class="fc" id="L51">            .build();</span>
+    }
+
+    private AfterburnerModule createAfterburnerModule() {
+<span class="fc" id="L55">        var module = new AfterburnerModule();</span>
+<span class="fc" id="L56">        module.setUseValueClassLoader(false);</span>
+<span class="fc" id="L57">        return module;</span>
+    }
+
+    private static &lt;T&gt; T invoke(final Callable&lt;T&gt; callable) {
+        try {
+<span class="fc" id="L62">            return callable.call();</span>
+<span class="nc" id="L63">        } catch (final Exception e) {</span>
+<span class="nc" id="L64">            throw new JsonProcessingException(&quot;Error processing JSON&quot;, e);</span>
+        }
+    }
+
+    public static class JsonProcessingException extends RuntimeException {
+        public JsonProcessingException(String message, Throwable cause) {
+<span class="nc" id="L70">            super(message, cause);</span>
+<span class="nc" id="L71">        }</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
