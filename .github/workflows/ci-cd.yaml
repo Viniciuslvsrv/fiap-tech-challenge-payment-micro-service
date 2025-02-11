@@ -82,9 +82,9 @@ jobs:
         continue-on-error: true
 
       - name: Run SonarQube Analysis
-        run: ./gradlew sonar -Dsonar.projectKey=fiap-g30_payment -Dsonar.organization=fiap-g30 -Dsonar.login=${{ secrets.SONAR_TOKEN }} -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
+        run: ./gradlew sonar -Dsonar.projectKey=fiap-g30_payment -Dsonar.organization=fiap-g30 -Dsonar.login=${{ secrets.SONAR_TOKEN }} -Dsonar.host.url=https://sonarcloud.io
         env:
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_HOST_URL: https://sonarcloud.io
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Send Discord Notification - Test Success
