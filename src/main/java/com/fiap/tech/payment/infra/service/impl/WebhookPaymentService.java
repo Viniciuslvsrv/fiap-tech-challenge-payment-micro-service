@@ -18,7 +18,7 @@ public class WebhookPaymentService {
         
         String payload = payment.toString();
 
-        ResponseEntity<String> response = restTemplate.postForEntity("http://localhost:8080/webhook/payment-notification", payload, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity("http://localhost:8083/webhook/payment-notification", payload, String.class);
 
         return response;
     }

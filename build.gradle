@@ -43,8 +43,8 @@ dependencies {
 	implementation 'com.mercadopago:sdk-java:2.1.29'
 
 	// Dependências relacionadas ao Elasticsearch
-	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
-	implementation 'org.elasticsearch.client:elasticsearch-rest-high-level-client:7.17.1'
+//	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
+//	implementation 'org.elasticsearch.client:elasticsearch-rest-high-level-client:7.17.1'
 
 	// Dependências relacionadas ao MongoDB
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb:3.3.1'
