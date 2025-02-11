@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PaymentEventListener.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fiap-tech-challenge-payment</a> &gt; <a href="index.source.html" class="el_package">com.fiap.tech.payment.infra.amqp</a> &gt; <span class="el_source">PaymentEventListener.java</span></div><h1>PaymentEventListener.java</h1><pre class="source lang-java linenums">package com.fiap.tech.payment.infra.amqp;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.stereotype.Service;
+
+import com.fiap.tech.payment.application.create.CreatePaymentCommand;
+import com.fiap.tech.payment.application.create.DefaultCreatePaymentUseCase;
+import com.fiap.tech.payment.infra.configuration.json.Json;
+import com.fiap.tech.payment.infra.payment.model.RabbitPaymentResquest;
+
+@Service
+public class PaymentEventListener {
+
+<span class="fc" id="L16">    private static final Logger log = LoggerFactory.getLogger(PaymentEventListener.class);</span>
+
+    static final String LISTENER_ID = &quot;PaymentEventListener&quot;;
+
+    private final DefaultCreatePaymentUseCase defaultCreatePaymentUseCase;
+    
+<span class="fc" id="L22">    public PaymentEventListener(DefaultCreatePaymentUseCase defaultCreatePaymentUseCase) {</span>
+<span class="fc" id="L23">        this.defaultCreatePaymentUseCase = defaultCreatePaymentUseCase;</span>
+<span class="fc" id="L24">    }</span>
+
+    @RabbitListener(
+        id = LISTENER_ID,
+        queues = &quot;${amqp.queues.payment-request.queue}&quot;
+    )
+    public void consumePaymentEvent(String message) {
+<span class="fc" id="L31">        final var aResult = Json.readValue(message, RabbitPaymentResquest.class);</span>
+        
+<span class="pc bpc" id="L33" title="1 of 2 branches missed.">        if (aResult instanceof RabbitPaymentResquest) {</span>
+<span class="fc" id="L34">            log.info(&quot;[message:payment.listener.income] [status:completed] [payload:{}]&quot;, message);</span>
+
+<span class="fc" id="L36">            RabbitPaymentResquest dto = (RabbitPaymentResquest) aResult;</span>
+    
+<span class="fc" id="L38">            final var aCmd = new CreatePaymentCommand(</span>
+<span class="fc" id="L39">                dto.clientID(),</span>
+<span class="fc" id="L40">                dto.orderID(),</span>
+<span class="fc" id="L41">                dto.amount()</span>
+            );
+    
+<span class="fc" id="L44">            defaultCreatePaymentUseCase.execute(aCmd);</span>
+<span class="fc" id="L45">        } else {</span>
+<span class="nc" id="L46">            log.error(&quot;[message:payment.listener.income] [status:error] [payload:{}]&quot;, message);</span>
+        }
+<span class="fc" id="L48">    }</span>
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

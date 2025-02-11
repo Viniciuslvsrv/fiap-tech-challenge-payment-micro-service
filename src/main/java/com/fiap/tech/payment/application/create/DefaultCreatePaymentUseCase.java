@@ -48,7 +48,6 @@ public class DefaultCreatePaymentUseCase extends CreatePaymentUseCase {
                 payment.updateStatus(PaymentStatus.FAILED);
             }
         } catch (Exception e) {
-            payment.updateStatus(PaymentStatus.FAILED);
             throw new RuntimeException("Erro ao processar o pagamento via webhook", e);
         }
     }

@@ -6,6 +6,7 @@ import java.util.UUID;
 import com.fiap.tech.payment.domain.Identifier;
 
 public class PaymentID extends Identifier {
+    
     private final String value;
 
     private PaymentID(String value) {
@@ -16,8 +17,8 @@ public class PaymentID extends Identifier {
         return new PaymentID(UUID.randomUUID().toString());
     }
 
-    public static PaymentID from(final String id) {
-        return new PaymentID(id);
+    public static PaymentID from(final String paymentID) {
+        return new PaymentID(paymentID);
     }
 
     public String getValue() {

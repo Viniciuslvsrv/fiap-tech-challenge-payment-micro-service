@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import org.springframework.data.annotation.Transient;
+
 import com.fiap.tech.payment.domain.validation.ValidationHandler;
 import com.fiap.tech.payment.domain.event.DomainEvent;
 import com.fiap.tech.payment.domain.event.DomainEventPublisher;
@@ -12,6 +14,8 @@ import com.fiap.tech.payment.domain.event.DomainEventPublisher;
 public abstract class Entity<ID extends Identifier> {
 
     protected final ID id;
+
+    @Transient
     private final List<DomainEvent> domainEvents;
 
     protected Entity(final ID id) {

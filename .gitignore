@@ -6,6 +6,7 @@ build/
 !**/src/test/**/build/
 !build/reports/
 !build/reports/**
+!build/reports/jacoco/
 !build/reports/jacoco/test/
 
 ### STS ###

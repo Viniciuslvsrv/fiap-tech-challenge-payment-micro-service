@@ -7,10 +7,15 @@ import com.fiap.tech.payment.domain.Identifier;
 import java.util.Collections;
 import java.util.List;
 
-public class NotFoundException extends DomainException{
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.http.HttpStatus;
+
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class NotFoundException extends DomainException {
 
     protected NotFoundException(String aMessage, List<Error> anErrors) {
         super(aMessage, anErrors);
+
     }
 
     public static NotFoundException with(
