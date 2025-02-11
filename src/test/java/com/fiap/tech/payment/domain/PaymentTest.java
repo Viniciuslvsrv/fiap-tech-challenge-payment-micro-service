@@ -145,7 +145,7 @@ public class PaymentTest {
         assertEquals(payment.getClientID(), event.clientID());
         assertEquals(payment.getAmount(), event.amount());
         assertEquals(payment.getCreatedAt(), event.createdAt());
-        assertEquals(payment.getPaymentStatus(), event.paymentStatus());
+        assertEquals(payment.getPaymentStatus().getValue(), event.paymentStatus());
         assertNotNull(event.occurredOn());
     }
 
