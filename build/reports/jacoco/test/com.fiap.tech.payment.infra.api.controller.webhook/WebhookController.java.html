@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>WebhookController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fiap-tech-challenge-payment</a> &gt; <a href="index.source.html" class="el_package">com.fiap.tech.payment.infra.api.controller.webhook</a> &gt; <span class="el_source">WebhookController.java</span></div><h1>WebhookController.java</h1><pre class="source lang-java linenums">package com.fiap.tech.payment.infra.api.controller.webhook;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Hidden;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+
+@RestController
+@RequestMapping(&quot;/webhook&quot;)
+@Tag(name = &quot;Webhook Controller&quot;, description = &quot;Receives payment notifications&quot;)
+@Hidden
+<span class="fc" id="L15">public class WebhookController {</span>
+
+    @PostMapping(&quot;/payment-notification&quot;)
+    @Operation(summary = &quot;Receives payment notifications&quot;)
+    public ResponseEntity&lt;String&gt; handlePaymentNotification(String payload) {
+        try {
+<span class="nc" id="L21">            return ResponseEntity.ok(&quot;Notification processed successfully&quot;);</span>
+<span class="nc" id="L22">        } catch (IllegalArgumentException e) {</span>
+<span class="nc" id="L23">            return ResponseEntity.badRequest().body(e.getMessage());</span>
+<span class="nc" id="L24">        } catch (Exception e) {</span>
+<span class="nc" id="L25">            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(&quot;Internal Server Error: &quot; + e.getMessage());</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
