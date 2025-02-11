@@ -4,6 +4,9 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+!build/reports/
+!build/reports/**
+!build/reports/jacoco/test/
 
 ### STS ###
 .apt_generated
