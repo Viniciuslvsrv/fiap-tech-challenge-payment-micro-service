@@ -99,6 +99,7 @@ sonar {
 		property "sonar.organization", "fiap-g30"
 		property "sonar.host.url", "https://sonarcloud.io"
 		property "sonar.token", System.getenv("SONAR_TOKEN")
+		property "sonar.coverage.jacoco.xmlReportPaths", "$rootDir/build/reports/jacoco/test/jacocoTestReport.xml"
 	}
 }
 
