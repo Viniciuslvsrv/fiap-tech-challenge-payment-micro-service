@@ -6,10 +6,18 @@ import java.time.Instant;
 import com.fiap.tech.payment.domain.event.DomainEvent;
 import com.fiap.tech.payment.domain.util.InstantUtil;
 
-<span class="fc" id="L9">public record PaymentCreated(String paymentID, String orderID, String clientID, BigDecimal amount, Instant createdAt, PaymentStatus paymentStatus, Instant occurredOn) implements DomainEvent {</span>
+<span class="fc" id="L9">public record PaymentCreated(</span>
+        String paymentID,
+        String orderID,
+        String clientID,
+        BigDecimal amount,
+        Instant createdAt,
+        String paymentStatus,
+        Instant occurredOn
+) implements DomainEvent {
 
     public  PaymentCreated(final Payment payment) {
-<span class="fc" id="L12">       this(payment.getId().getValue(), payment.getOrderID(), payment.getClientID(), payment.getAmount(), payment.getCreatedAt(), payment.getPaymentStatus(), InstantUtil.now());</span>
-<span class="fc" id="L13">    }</span>
+<span class="fc" id="L20">       this(payment.getId().getValue(), payment.getOrderID(), payment.getClientID(), payment.getAmount(), payment.getCreatedAt(), payment.getPaymentStatus().getValue(), InstantUtil.now());</span>
+<span class="fc" id="L21">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
