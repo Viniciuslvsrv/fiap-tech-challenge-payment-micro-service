@@ -42,10 +42,6 @@ dependencies {
 	// Dependências relacionadas ao MercadoPago
 	implementation 'com.mercadopago:sdk-java:2.1.29'
 
-	// Dependências relacionadas ao Elasticsearch
-//	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
-//	implementation 'org.elasticsearch.client:elasticsearch-rest-high-level-client:7.17.1'
-
 	// Dependências relacionadas ao MongoDB
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb:3.3.1'
 	implementation 'org.springframework.data:spring-data-mongodb:4.3.1'
@@ -54,9 +50,6 @@ dependencies {
 	implementation 'com.fasterxml.jackson.core:jackson-core:2.18.2'
 	implementation 'com.fasterxml.jackson.module:jackson-module-afterburner:2.18.2'
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.2'
-
-	// Dependências de Monitoramento
-	implementation 'io.micrometer:micrometer-registry-prometheus'
 
 	// Dependências de Testes
 	testImplementation 'org.springframework.boot:spring-boot-starter-test' 
