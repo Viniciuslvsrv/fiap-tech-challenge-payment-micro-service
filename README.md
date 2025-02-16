@@ -65,7 +65,7 @@ Este repositório contém o pipeline de CI/CD para a aplicação lanchonete-app,
 
 **Visão Geral**
 
-Este pipeline de CI/CD automatiza o processo de build, teste e deploy da aplicação lanchonete-app. Ele é acionado em commits na branch master e em pull requests para a mesma branch.
+Este pipeline de CI/CD automatiza o processo de build, teste e deploy da aplicação lanchonete-app. Ele é acionado em commits na branch main e em pull requests para a mesma branch.
 
 **Estrutura do Pipeline**
 
